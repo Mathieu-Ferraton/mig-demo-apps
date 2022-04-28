@@ -79,7 +79,7 @@ items:
         spec:
           serviceAccountName: mongo-persistent-sa
           containers:
-          - image: mongo:latest
+          - image: registry.redhat.io/rhscl/mongodb-36-rhel7:latest
             name: mongo
             securityContext:
               privileged: true
@@ -90,6 +90,8 @@ items:
                 value: changeme
               - name: MONGO_INITDB_DATABASE
                 value: todolist
+              - name: MONGODB_ADMIN_PASSWORD
+                value: root
             ports:
             - containerPort: 27017
               name: mongo
@@ -141,8 +143,8 @@ items:
       source:
         type: Git
         git:
-          uri: https://github.com/your_org/mig-demo-apps.git
-          ref: master
+          uri: https://github.com/Mathieu-Ferraton/mig-demo-apps.git
+          ref: multiarch-mongo
       strategy:
         type: Docker
         dockerStrategy:
