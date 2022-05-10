@@ -79,7 +79,7 @@ items:
         spec:
           serviceAccountName: mongo-persistent-sa
           containers:
-          - image: mongo:latest
+          - image: ibmcom/ibm-enterprise-mongodb-ppc64le
             name: mongo
             securityContext:
               privileged: true
@@ -141,8 +141,8 @@ items:
       source:
         type: Git
         git:
-          uri: https://github.com/your_org/mig-demo-apps.git
-          ref: master
+          uri: https://github.com/Mathieu-Ferraton/mig-demo-apps.git
+          ref: multiarch-mongodb
       strategy:
         type: Docker
         dockerStrategy:
