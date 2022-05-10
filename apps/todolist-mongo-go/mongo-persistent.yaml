@@ -84,11 +84,11 @@ items:
             securityContext:
               privileged: true
             env:
-              - name: MONGO_INITDB_ROOT_USERNAME
+              - name: MONGODB_USER_ADMIN
                 value: changeme
-              - name: MONGO_INITDB_ROOT_PASSWORD
+              - name: MONGODB_USER_ADMIN_PASSWORD
                 value: changeme
-              - name: MONGO_INITDB_DATABASE
+              - name: MONGODB_DATABASE
                 value: todolist
             ports:
             - containerPort: 27017
