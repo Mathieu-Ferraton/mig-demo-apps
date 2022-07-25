@@ -24,8 +24,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"path"
 	"strconv"
 
@@ -38,7 +40,10 @@ import (
 )
 
 // remote connection
-var db, _ = gorm.Open("mysql", "changeme:changeme@(mysql:3306)/todolist?charset=utf8&parseTime=True")
+
+var db *gorm.DB
+
+//, _ = gorm.Open("mysql", "changeme:changeme@(mysql:3306)/todolist?charset=utf8&parseTime=True")
 
 // local connection
 //var db, _ = gorm.Open("mysql", "root:root@tcp/todolist?charset=utf8&parseTime=True")
@@ -158,6 +163,13 @@ func prepopulate() {
 }
 
 func main() {
+	db_name, exists := os.LookupEnv("DB_NAME")
+	if !exists {
+		db_name = "mysql"
+	}
+	connection_path := fmt.Sprintf("changeme:changeme@(%s:3305)/todolist?charset=utf8&parseTime=True", db_name)
+	db, _ = gorm.Open("mysql", connection_path)
+
 	defer db.Close()
 	previousDb := db.Take(&TodoItemModel{})
 	if previousDb.Error != nil {
