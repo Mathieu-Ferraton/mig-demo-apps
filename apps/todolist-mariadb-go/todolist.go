@@ -168,6 +168,7 @@ func main() {
 		db_name = "mysql"
 	}
 	connection_path := fmt.Sprintf("changeme:changeme@(%s:3305)/todolist?charset=utf8&parseTime=True", db_name)
+	fmt.Printf("connection path: %s", connection_path)
 	db, _ = gorm.Open("mysql", connection_path)
 
 	defer db.Close()
